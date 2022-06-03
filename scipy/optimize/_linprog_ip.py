@@ -818,7 +818,7 @@ def _ip_hsd(A, b, c, c0, alpha0, beta, maxiter, disp, tol, sparse, lstsq,
 
     x_hat = x / tau
     # [4] Statement after Theorem 8.2
-    return x_hat, status, message, iteration
+    return x_hat, y, status, message, iteration
 
 
 def _linprog_ip(c, c0, A, b, callback, postsolve_args, maxiter=1000, tol=1e-8,
@@ -1119,10 +1119,10 @@ def _linprog_ip(c, c0, A, b, callback, postsolve_args, maxiter=1000, tol=1e-8,
 
     cholesky = cholesky or (cholesky is None and sym_pos and not lstsq)
 
-    x, status, message, iteration = _ip_hsd(A, b, c, c0, alpha0, beta,
+    x, y, status, message, iteration = _ip_hsd(A, b, c, c0, alpha0, beta,
                                             maxiter, disp, tol, sparse,
                                             lstsq, sym_pos, cholesky,
                                             pc, ip, permc_spec, callback,
                                             postsolve_args)
 
-    return x, status, message, iteration
+    return x, y, status, message, iteration

@@ -638,7 +638,7 @@ def linprog(c, A_ub=None, b_ub=None, A_eq=None, b_eq=None,
                 c, c0=c0, A=A, b=b, callback=callback,
                 postsolve_args=postsolve_args, **solver_options)
         elif meth == 'interior-point':
-            x, status, message, iteration = _linprog_ip(
+            x, y, status, message, iteration = _linprog_ip(
                 c, c0=c0, A=A, b=b, callback=callback,
                 postsolve_args=postsolve_args, **solver_options)
         elif meth == 'revised simplex':
@@ -658,6 +658,7 @@ def linprog(c, A_ub=None, b_ub=None, A_eq=None, b_eq=None,
 
     sol = {
         'x': x,
+        'y': y,
         'fun': fun,
         'slack': slack,
         'con': con,
